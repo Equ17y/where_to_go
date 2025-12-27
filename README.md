@@ -13,16 +13,24 @@
   - WYSIWYG-редактор для описаний
   - превью загруженных фото
 
-## Технологии
 
-- Python 3.10+
-- Django 5.0
-- PostgreSQL / SQLite (для разработки)
-- Leaflet.js + Vue.js (фронтенд)
-- Bootstrap 4
-- `django-admin-sortable2`
-- `django-tinymce`
-- `environs` для безопасных настроек
+## Установка и запуск
+
+1. Клонируйте репозиторий:
+    ```bash
+    git clone https://github.com/Equ17y/where_to_go.git
+    ```
+
+2. Создайте виртуальное окружение и активируйте его:
+    ```bash
+    python -m venv venv
+    venv\Scripts\Activate
+    ```
+
+3. Установите зависимости:
+   ```bash
+   pip install -r requirements.txt
+
 
 ## Запуск локально
 
@@ -52,4 +60,16 @@
 Для загрузки локации из JSON-файла выполните:
 
 ```bash
-python manage.py load_place https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/moscow_legends.json       
+python manage.py load_place https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/moscow_legends.json
+```
+
+## Технологии
+
+- Python 3.10+
+- Django 5.0
+- PostgreSQL / SQLite (для разработки)
+- Leaflet.js + Vue.js (фронтенд)
+- Bootstrap 4
+- `django-admin-sortable2`
+- `django-tinymce`
+- `environs` для безопасных настроек
