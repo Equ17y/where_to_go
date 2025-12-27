@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Place, PlaceImage
 from django.utils.html import format_html
 from adminsortable2.admin import SortableAdminBase, SortableInlineAdminMixin
+from tinymce.widgets import TinyMCE
 # Register your models here.
 
 class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -26,3 +27,8 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [PlaceImageInline]
     list_display = ('name', 'lat', 'lng')
+    
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields['description_long'].widget = TinyMCE()
+        return form
