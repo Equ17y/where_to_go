@@ -2,3 +2,4 @@ Django~=5.1.2
 environs
 django-admin-sortable2
 django-tinymce
+requests

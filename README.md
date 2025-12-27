@@ -45,4 +45,11 @@
     python manage.py runserver
     ```
 
-4. Откройте http://127.0.0.1:8000    
+4. Откройте http://127.0.0.1:8000
+
+## Загрузка данных
+
+Для загрузки локации из JSON-файла выполните:
+
+```bash
+python manage.py load_place https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/moscow_legends.json       
