@@ -25,7 +25,8 @@ class PlaceImage(models.Model):
      
     position = models.PositiveIntegerField(
         default=0,
-        verbose_name='Порядок'
+        verbose_name='Порядок',
+        db_index=True
     )
      
     class Meta:
