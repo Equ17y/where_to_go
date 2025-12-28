@@ -34,5 +34,5 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        form.base_fields["description_long"].widget = TinyMCE()
+        form.base_fields["long_description"].widget = TinyMCE()
         return form
