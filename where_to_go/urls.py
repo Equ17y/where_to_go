@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from where_to_go.views import index, place_detail
+from places.views import index, place_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
