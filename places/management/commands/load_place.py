@@ -1,9 +1,11 @@
 # places/management/commands/load_place.py
+from urllib.parse import urljoin, urlparse
+
 import requests
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
+
 from places.models import Place, PlaceImage
-from urllib.parse import urljoin, urlparse
 
 
 class Command(BaseCommand):

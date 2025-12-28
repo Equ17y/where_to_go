@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Place(models.Model):
     name = models.CharField(max_length=200, verbose_name="Название")
     description_short = models.TextField(verbose_name="Короткое описание", blank=True)

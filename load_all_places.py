@@ -1,6 +1,7 @@
 # load_all_places.py
 import os
 import sys
+
 import django
 
 # Настраиваем Django
@@ -8,6 +9,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "where_to_go.settings")
 django.setup()
 
 from places.management.commands.load_place import Command
+
 
 def main():
     if len(sys.argv) != 2:
