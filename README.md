@@ -8,38 +8,46 @@
 
 - Просмотр локаций на интерактивной карте
 - Детальные описания с HTML-форматированием
-- Удобная админка для управления контентом:
+- Удобная админ-панель для управления контентом:
   - drag-and-drop сортировка изображений
   - WYSIWYG-редактор для описаний
-  - превью загруженных фото
+  - превью загруженных фотографий
 
+## Требования
+
+- Python 3.13.3
 
 ## Установка и запуск
 
 1. Клонируйте репозиторий:
+
     ```bash
     git clone https://github.com/Equ17y/where_to_go.git
     ```
 
 2. Создайте виртуальное окружение и активируйте его:
+
     ```bash
     python -m venv venv
     venv\Scripts\Activate
     ```
 
 3. Установите зависимости:
-   ```bash
-   pip install -r requirements.txt
 
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ## Запуск локально
 
-1. Установите зависимости:
-   ```bash
-   pip install -r requirements.txt
+1. Установите зависимости (если ещё не установлены):
+
+    ```bash
+    pip install -r requirements.txt
     ```
 
-2. Создайте .env файл (пример в .env.example):
+2. Создайте файл `.env` на основе примера в `.env.example`:
+
     ```bash
     SECRET_KEY=ваш_секретный_ключ
     DEBUG=True
@@ -47,17 +55,18 @@
     ```
 
 3. Выполните миграции и запустите сервер:
-   ```bash
+
+    ```bash
     python manage.py migrate
     python manage.py createsuperuser
     python manage.py runserver
     ```
 
-4. Откройте http://127.0.0.1:8000
+4. Откройте в браузере: http://127.0.0.1:8000
 
 ## Загрузка данных
 
-Для загрузки локации из JSON-файла выполните:
+Для загрузки локации из JSON-файла выполните команду:
 
 ```bash
 python manage.py load_place https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/moscow_legends.json
