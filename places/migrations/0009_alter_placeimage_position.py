@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('places', '0008_alter_placeimage_position'),
+        ("places", "0008_alter_placeimage_position"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='placeimage',
-            name='position',
-            field=models.PositiveIntegerField(db_index=True, default=0, verbose_name='Порядок'),
+            model_name="placeimage",
+            name="position",
+            field=models.PositiveIntegerField(
+                db_index=True, default=0, verbose_name="Порядок"
+            ),
         ),
     ]

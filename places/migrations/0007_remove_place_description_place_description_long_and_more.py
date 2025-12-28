@@ -6,22 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('places', '0006_remove_place_description_long_and_more'),
+        ("places", "0006_remove_place_description_long_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='place',
-            name='description',
+            model_name="place",
+            name="description",
         ),
         migrations.AddField(
-            model_name='place',
-            name='description_long',
-            field=models.TextField(blank=True, verbose_name='Полное описание'),
+            model_name="place",
+            name="description_long",
+            field=models.TextField(blank=True, verbose_name="Полное описание"),
         ),
         migrations.AddField(
-            model_name='place',
-            name='description_short',
-            field=models.TextField(blank=True, verbose_name='Короткое описание'),
+            model_name="place",
+            name="description_short",
+            field=models.TextField(blank=True, verbose_name="Короткое описание"),
         ),
     ]

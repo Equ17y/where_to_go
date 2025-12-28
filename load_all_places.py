@@ -1,4 +1,5 @@
 # load_all_places.py
+from places.management.commands.load_place import Command
 import os
 import sys
 
@@ -7,8 +8,6 @@ import django
 # Настраиваем Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "where_to_go.settings")
 django.setup()
-
-from places.management.commands.load_place import Command
 
 
 def main():
@@ -30,6 +29,7 @@ def main():
             print(f"  ❌ Ошибка: {e}")
 
     print(f"\n Успешно загружено {total} локаций!")
+
 
 if __name__ == "__main__":
     main()
