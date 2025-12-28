@@ -26,7 +26,6 @@ class Command(BaseCommand):
             self.stderr.write(f"Invalid JSON: {e}")
             return
 
-        # Создаём или обновляем локацию
         place, created = Place.objects.get_or_create(
             name=place_data["title"],
             defaults={
@@ -38,7 +37,6 @@ class Command(BaseCommand):
         )
 
         if not created:
-            # Обновляем данные, если локация уже существует
             place.short_description = place_data.get("description_short", "")
             place.long_description = place_data.get("description_long", "")
             place.lat = place_data["coordinates"]["lat"]
@@ -48,22 +46,18 @@ class Command(BaseCommand):
         else:
             self.stdout.write(f"Created place: {place.name}")
 
-        # Загружаем изображения
         for img_url in place_data.get("imgs", []):
             try:
                 img_response = requests.get(img_url)
                 img_response.raise_for_status()
 
-                # Извлекаем имя файла из URL
                 filename = urlparse(img_url).path.split("/")[-1] or "image.jpg"
 
-                # Создаём PlaceImage, если ещё не существует
                 image_obj, img_created = PlaceImage.objects.get_or_create(
                     place=place, image=f"places/{filename}"
                 )
 
                 if img_created:
-                    # Сохраняем изображение в ImageField
                     image_obj.image.save(
                         filename, ContentFile(img_response.content), save=True
                     )

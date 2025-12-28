@@ -5,7 +5,6 @@ from tinymce.widgets import TinyMCE
 
 from .models import Place, PlaceImage
 
-# Register your models here.
 
 
 class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
