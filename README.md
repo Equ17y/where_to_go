@@ -21,7 +21,7 @@
 
 Перед запуском проекта необходимо настроить следующие переменные окружения в файле `.env`:
 
-### Обязательные переменные
+## Обязательные переменные
 
 **`SECRET_KEY`** — секретный ключ для конкретной установки Django. Используется для криптографической подписи и должен быть уникальным и непредсказуемым значением.
 
@@ -80,20 +80,55 @@ ALLOWED_HOSTS=127.0.0.1,localhost
 
 3. Выполните миграции и запустите сервер:
 
+- Выполните миграции базы данных:
+
     ```bash
     python manage.py migrate
+    ```
+
+- Создайте суперпользователя для доступа к админ-панели:
+
+    ```bash
     python manage.py createsuperuser
+    ```
+
+- Запустите сервер разработки:
+
+    ```bash
     python manage.py runserver
     ```
 
-4. Откройте в браузере: http://127.0.0.1:8000
+4. Откройте в браузере:
+
+- Приложение: http://127.0.0.1:8000
+- Админ-панель: http://127.0.0.1:8000/admin
 
 ## Загрузка данных
 
-Для загрузки локации из JSON-файла выполните команду:
+Особенности и и пример запуска скрипта `load_place`:
+
+- Формат JSON-файла:
+
+```json
+{
+    "title": "Название места",
+    "imgs": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
+    "description_short": "Краткое описание",
+    "description_long": "<p>Полное описание с HTML-разметкой</p>",
+    "coordinates": {
+        "lng": "37.6173",
+        "lat": "55.7558"
+    }
+}
+```
+
+- Пример запуска:
 
 ```bash
 python manage.py load_place https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/moscow_legends.json
+Created place: Экскурсионная компания «Легенды Москвы»
+  Added image: 4f793576c79c1cbe68b73800ae06f06f.jpg
+  Added image: 7a7631bab8af3e340993a6fb1ded3e73.jpg
 ```
 
 ## Технологии
