@@ -5,44 +5,47 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ("places", "0001_initial"),
+        ('places', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name="PlaceImage",
+            name='PlaceImage',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.BigAutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
                 (
-                    "image",
-                    models.ImageField(upload_to="places", verbose_name="Картинка"),
+                    'image',
+                    models.ImageField(
+                        upload_to='places', verbose_name='Картинка'
+                    ),
                 ),
                 (
-                    "position",
-                    models.PositiveIntegerField(default=0, verbose_name="Порядок"),
+                    'position',
+                    models.PositiveIntegerField(
+                        default=0, verbose_name='Порядок'
+                    ),
                 ),
                 (
-                    "place",
+                    'place',
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="image",
-                        to="places.place",
-                        verbose_name="Место",
+                        related_name='image',
+                        to='places.place',
+                        verbose_name='Место',
                     ),
                 ),
             ],
             options={
-                "ordering": ["position"],
+                'ordering': ['position'],
             },
         ),
     ]

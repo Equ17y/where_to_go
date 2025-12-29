@@ -4,29 +4,31 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name="Place",
+            name='Place',
             fields=[
                 (
-                    "id",
+                    'id',
                     models.BigAutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
-                        verbose_name="ID",
+                        verbose_name='ID',
                     ),
                 ),
-                ("name", models.CharField(max_length=200, verbose_name="Название")),
                 (
-                    "description",
+                    'name',
+                    models.CharField(max_length=200, verbose_name='Название'),
+                ),
+                (
+                    'description',
                     models.CharField(
-                        blank=True, max_length=300, verbose_name="Описание"
+                        blank=True, max_length=300, verbose_name='Описание'
                     ),
                 ),
             ],

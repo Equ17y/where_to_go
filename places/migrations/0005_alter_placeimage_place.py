@@ -5,20 +5,22 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ("places", "0004_remove_place_description_place_description_long_and_more"),
+        (
+            'places',
+            '0004_remove_place_description_place_description_long_and_more',
+        ),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name="placeimage",
-            name="place",
+            model_name='placeimage',
+            name='place',
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name="images",
-                to="places.place",
-                verbose_name="Место",
+                related_name='images',
+                to='places.place',
+                verbose_name='Место',
             ),
         ),
     ]

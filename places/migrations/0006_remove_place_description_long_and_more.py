@@ -4,24 +4,23 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ("places", "0005_alter_placeimage_place"),
+        ('places', '0005_alter_placeimage_place'),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name="place",
-            name="description_long",
+            model_name='place',
+            name='description_long',
         ),
         migrations.RemoveField(
-            model_name="place",
-            name="description_short",
+            model_name='place',
+            name='description_short',
         ),
         migrations.AddField(
-            model_name="place",
-            name="description",
-            field=models.TextField(default=""),
+            model_name='place',
+            name='description',
+            field=models.TextField(default=''),
             preserve_default=False,
         ),
     ]

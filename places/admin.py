@@ -6,44 +6,44 @@ from tinymce.widgets import TinyMCE
 from .models import Place, PlaceImage
 
 
-
 class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = PlaceImage
     extra = 1
-    ordering = ("position",)
-    readonly_fields = ("image_preview",)
-    fields = ("image", "image_preview")
+    ordering = ('position',)
+    readonly_fields = ('image_preview',)
+    fields = ('image', 'image_preview')
 
     def image_preview(self, obj):
         if obj.image:
             return format_html(
-                '<img src="{}" style="max-height: 200px; max-width: 300px; ' 
+                '<img src="{}" style="max-height: 200px; max-width: 300px; '
                 ' width: auto; border: 1px solid #ccc;"/>',
                 obj.image.url,
             )
-        return "Нет изображения"
+        return 'Нет изображения'
 
-    image_preview.short_description = "Превью"
+    image_preview.short_description = 'Превью'
 
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [PlaceImageInline]
-    list_display = ("name", "lat", "lng")
+    list_display = ('name', 'lat', 'lng')
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        form.base_fields["long_description"].widget = TinyMCE()
+        form.base_fields['long_description'].widget = TinyMCE()
         return form
-    
+
+
 @admin.register(PlaceImage)
 class PlaceImageAdmin(admin.ModelAdmin):
-    list_display = ("image_preview", "place", "position")
-    list_filter = ("place",)
-    ordering = ("place", "position")
-    readonly_fields = ("image_preview",)
+    list_display = ('image_preview', 'place', 'position')
+    list_filter = ('place',)
+    ordering = ('place', 'position')
+    readonly_fields = ('image_preview',)
     # 👇 КЛЮЧЕВОЕ: избегаем гигантского <select>
-    raw_id_fields = ("place",)  # или autocomplete_fields = ("place",)
+    raw_id_fields = ('place',)  # или autocomplete_fields = ("place",)
 
     def image_preview(self, obj):
         if obj.image:
@@ -52,7 +52,6 @@ class PlaceImageAdmin(admin.ModelAdmin):
                 'width: auto; height: auto; border: 1px solid #ccc;"/>',
                 obj.image.url,
             )
-        return "Нет изображения"
+        return 'Нет изображения'
 
-    image_preview.short_description = "Превью"
-        
+    image_preview.short_description = 'Превью'
