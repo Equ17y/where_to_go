@@ -18,7 +18,7 @@ class Command(BaseCommand):
         try:
             response = requests.get(url)
             response.raise_for_status()
-            place_data = response.json()
+            raw_place = response.json()
         except requests.RequestException as e:
             self.stderr.write(f"Error downloading JSON: {e}")
             return
@@ -27,26 +27,26 @@ class Command(BaseCommand):
             return
 
         place, created = Place.objects.get_or_create(
-            name=place_data["title"],
+            name=raw_place["title"],
             defaults={
-                "short_description": place_data.get("short_description", ""),
-                "long_description": place_data.get("long_description", ""),
-                "lat": place_data["coordinates"]["lat"],
-                "lng": place_data["coordinates"]["lng"],
+                "short_description": raw_place.get("short_description", ""),
+                "long_description": raw_place.get("long_description", ""),
+                "lat": raw_place["coordinates"]["lat"],
+                "lng": raw_place["coordinates"]["lng"],
             },
         )
 
         if not created:
-            place.short_description = place_data.get("description_short", "")
-            place.long_description = place_data.get("description_long", "")
-            place.lat = place_data["coordinates"]["lat"]
-            place.lng = place_data["coordinates"]["lng"]
+            place.short_description = raw_place.get("description_short", "")
+            place.long_description = raw_place.get("description_long", "")
+            place.lat = raw_place["coordinates"]["lat"]
+            place.lng = raw_place["coordinates"]["lng"]
             place.save()
             self.stdout.write(f"Updated place: {place.name}")
         else:
             self.stdout.write(f"Created place: {place.name}")
 
-        for img_url in place_data.get("imgs", []):
+        for img_url in raw_place.get("imgs", []):
             try:
                 img_response = requests.get(img_url)
                 img_response.raise_for_status()
