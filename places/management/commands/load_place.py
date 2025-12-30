@@ -26,25 +26,18 @@ class Command(BaseCommand):
             self.stderr.write(f'Invalid JSON: {e}')
             return
 
-        place, created = Place.objects.get_or_create(
+        place, created = Place.objects.update_or_create(
             name=raw_place['title'],
             defaults={
-                'short_description': raw_place.get('short_description', ''),
-                'long_description': raw_place.get('long_description', ''),
+                'short_description': raw_place.get('description_short', ''),
+                'long_description': raw_place.get('description_long', ''),
                 'lat': raw_place['coordinates']['lat'],
                 'lng': raw_place['coordinates']['lng'],
             },
         )
-
-        if not created:
-            place.short_description = raw_place.get('description_short', '')
-            place.long_description = raw_place.get('description_long', '')
-            place.lat = raw_place['coordinates']['lat']
-            place.lng = raw_place['coordinates']['lng']
-            place.save()
-            self.stdout.write(f'Updated place: {place.name}')
-        else:
-            self.stdout.write(f'Created place: {place.name}')
+        
+        action = "Updated" if not created else "Created"
+        self.stdout.write(f"{action} place: {place.name}")
 
         for img_url in raw_place.get('imgs', []):
             try:
