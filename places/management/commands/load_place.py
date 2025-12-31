@@ -45,18 +45,14 @@ class Command(BaseCommand):
                 img_response.raise_for_status()
 
                 filename = urlparse(img_url).path.split('/')[-1] or 'image.jpg'
-
-                image_obj, img_created = PlaceImage.objects.get_or_create(
-                    place=place, image=f'places/{filename}'
-                )
-
-                if img_created:
-                    image_obj.image.save(
-                        filename, ContentFile(img_response.content), save=True
-                    )
-                    self.stdout.write(f'  Added image: {filename}')
-                else:
+                
+                if PlaceImage.objects.filter(place=place, image=f'places/{filename}').exists():
                     self.stdout.write(f'  Image already exists: {filename}')
+                    continue
+                
+                image_obj = PlaceImage(place=place)
+                image_obj.image.save(filename, ContentFile(img_response.content), save=True)
+                self.stdout.write(f'  Added image: {filename}')
 
             except requests.RequestException as e:
                 self.stderr.write(f'  Failed to download {img_url}: {e}')

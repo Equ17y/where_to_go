@@ -42,9 +42,7 @@ class PlaceImageAdmin(admin.ModelAdmin):
     list_filter = ('place',)
     ordering = ('place', 'position')
     readonly_fields = ('image_preview',)
-    # 👇 КЛЮЧЕВОЕ: избегаем гигантского <select>
-    raw_id_fields = ('place',)  # или autocomplete_fields = ("place",)
-
+    raw_id_fields = ('place',)
     def image_preview(self, obj):
         if obj.image:
             return format_html(
